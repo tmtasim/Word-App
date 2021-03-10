@@ -40,6 +40,12 @@ Now the service could be reached from: `http://localhost:3001/`
 `DELETE  /api/v1/message/:id` - Delete message  
 `GET     /api/v1/message`  - Get all messages
 
+
+### Sequence Diagram
+Sample sequence diagram for fetching all messages
+
+![alt text](https://github.com/tmtasim/Word-App/blob/main/documentation/sequence_diagram.png?raw=true)
+
 ## Learn more
 
   * Elixir official website: https://elixir-lang.org/
@@ -47,3 +53,5 @@ Now the service could be reached from: `http://localhost:3001/`
   * Elixir Phoenix: https://phoenixframework.org/
   * React: https://reactjs.org/
   * Docker: https://www.docker.com/
+
+
