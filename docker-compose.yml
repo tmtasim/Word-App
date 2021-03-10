@@ -1,0 +1,45 @@
+version: '3.6'
+services:
+  postgres:
+    image: "postgres"
+    container_name: "word_db"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=word_service_dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+  ui:
+    container_name: ui
+    build:
+      context: ./ui
+      dockerfile: Dockerfile
+    volumes:
+      - './ui:/app'
+      - '/app/node_modules'
+    ports:
+      - 3001:3000
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    depends_on:
+      - word-service
+  word-service:
+    build: word_service
+    volumes:
+      - type: bind
+        source: ./word_service
+        target: /app
+    environment:
+    - MIX_ENV=dev
+    - PORT=4000
+    - DATABASE_URL=ecto://postgres:postgres@postgres/word_service_dev
+    ports:
+      - "4000:4000"
+    depends_on:
+      - postgres
+    command:
+      - ./run.sh 
+    links:
+      - postgres
