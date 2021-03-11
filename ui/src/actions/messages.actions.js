@@ -9,7 +9,6 @@ export const cleanMessagesData = () => async (dispatch) => {
 }
 
 export const addMessage = (message) => async (dispatch) => {
-    console.log("Trying to send " + JSON.stringify(message))
     dispatch(actionCreator.request(ADD_MESSAGE));
     try {
         const response = await axiosInstance.post('/api/v1/message', message);
